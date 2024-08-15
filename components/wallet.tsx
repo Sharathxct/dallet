@@ -12,7 +12,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function Wallet() {
   return (
-    <div className="md:w-[60dvw] dark:bg-slate-900 min-h-[60dvh] ">
+    <div className="max-w-screen w-full md:w-[60dvw] dark:bg-slate-900 min-h-[60dvh] ">
       <header className="flex items-center justify-between p-4 border-b border-gray-700">
         <Popover>
           <PopoverTrigger><Badge variant="outline" className="text-base cursor-pointer" >Ethereum <ChevronDownIcon /> </Badge></PopoverTrigger>
@@ -24,7 +24,7 @@ export default function Wallet() {
               <div className="flex w-full justify-between items-center" >
                 <div className="flex flex-row items-center w-full mt-4" >
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src="https://cryptologos.cc/logos/solana-sol-logo.png?v=032" />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div className="ml-4" >
@@ -37,7 +37,7 @@ export default function Wallet() {
               <div className="flex w-full justify-between items-center" >
                 <div className="flex flex-row items-center w-full mt-4" >
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=032" />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <div className="ml-4" >
@@ -102,19 +102,19 @@ export default function Wallet() {
           <p className="text-gray-400">$0.00 USD</p>
         </div>
         <div className="flex justify-center my-8 w-full justify-center gap-10">
-          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 min-w-24 ">
+          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 md:min-w-24 ">
             <IoIosAdd size={32} />
             <span className="text-base">Buy & Sell</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 min-w-24">
+          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
             <IoIosSend size={32} />
             <span className="text-base">Send</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 min-w-24">
+          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
             <IoIosSwap size={32} />
             <span className="text-base">Swap</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 min-w-24">
+          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
             <IoIosCash size={32} />
             <span className="text-base">Buy</span>
           </Button>
