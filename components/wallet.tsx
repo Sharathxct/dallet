@@ -9,13 +9,14 @@ import {
 } from "@/components/ui/popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BsThreeDotsVertical } from "react-icons/bs";
+import Account from "@/components/Account";
 
 export default function Wallet() {
   return (
     <div className="max-w-screen w-full md:w-[60dvw] dark:bg-slate-900 min-h-[60dvh] ">
       <header className="flex items-center justify-between p-4 border-b border-gray-700">
         <Popover>
-          <PopoverTrigger><Badge variant="outline" className="text-base cursor-pointer" >Ethereum <ChevronDownIcon /> </Badge></PopoverTrigger>
+          <PopoverTrigger><Badge variant="outline" className="text-base cursor-pointer" >Solana Devnet<ChevronDownIcon /> </Badge></PopoverTrigger>
           {/* <PopoverContent>Place content for the popover here.</PopoverContent> */}
           <PopoverContent className="dark:bg-slate-900" >
             <div className="flex flex-col justify-center items-center">
@@ -25,23 +26,10 @@ export default function Wallet() {
                 <div className="flex flex-row items-center w-full mt-4" >
                   <Avatar>
                     <AvatarImage src="https://cryptologos.cc/logos/solana-sol-logo.png?v=032" />
-                    <AvatarFallback>CN</AvatarFallback>
+                    <AvatarFallback>SL</AvatarFallback>
                   </Avatar>
                   <div className="ml-4" >
-                    <p>Solana</p>
-                  </div>
-                </div>
-                <BsThreeDotsVertical className="cursor-pointer" />
-              </div>
-
-              <div className="flex w-full justify-between items-center" >
-                <div className="flex flex-row items-center w-full mt-4" >
-                  <Avatar>
-                    <AvatarImage src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=032" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <div className="ml-4" >
-                    <p>Ethereum</p>
+                    <p>Solana Devnet</p>
                   </div>
                 </div>
                 <BsThreeDotsVertical className="cursor-pointer" />
@@ -50,7 +38,6 @@ export default function Wallet() {
               <Button className="w-full mt-8">Add Network</Button>
             </div>
           </PopoverContent>
-
         </Popover>
         <Popover>
           <PopoverTrigger>
@@ -61,40 +48,12 @@ export default function Wallet() {
           </PopoverTrigger>
           <PopoverContent className="dark:bg-slate-900" >
             <div className="flex flex-col justify-center items-center">
-              <h1>Select an account</h1>
-
-              <div className="flex w-full justify-between items-center" >
-                <div className="flex flex-row items-center w-full mt-4" >
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <div className="ml-4" >
-                    <p>Account 1</p>
-                    <p>0x63g...u7w3</p>
-                  </div>
-                </div>
-                <BsThreeDotsVertical className="cursor-pointer" />
-              </div>
-
-              <div className="flex w-full justify-between items-center" >
-                <div className="flex flex-row items-center w-full mt-4" >
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                  </Avatar>
-                  <div className="ml-4" >
-                    <p>Account 2</p>
-                    <p>0x63g...u7w3</p>
-                  </div>
-                </div>
-                <BsThreeDotsVertical className="cursor-pointer" />
-              </div>
-
-              <Button className="w-full mt-8">Add Account</Button>
+              <h1 >Select an account</h1>
+              <Account />
             </div>
           </PopoverContent>
         </Popover>
+
       </header>
       <main className="p-4 ">
         <div className="text-center">
@@ -140,7 +99,7 @@ export default function Wallet() {
   )
 }
 
-function ChevronDownIcon(props: any) {
+export function ChevronDownIcon(props: any) {
   return (
     <svg
       {...props}

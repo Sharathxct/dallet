@@ -6,9 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import CBtn from "@/components/create-btn";
 
 export function Mnemonic() {
   const [currentStep, setCurrentStep] = useState(1)
+  const [mnemonic, setMnemonic] = useState([])
+
+  const nextStep = () => {
+    setCurrentStep(2);
+  }
+
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
@@ -36,9 +43,7 @@ export function Mnemonic() {
               <Label htmlFor="confirmPassword">Confirm Password</Label>
               <Input id="confirmPassword" type="password" placeholder="Confirm your password" />
             </div>
-            <Button className="w-full" onClick={() => setCurrentStep(2)}>
-              Continue
-            </Button>
+            <CBtn nextStep={nextStep} setMnemonic={setMnemonic} />
           </div>
         )}
         {currentStep === 2 && (
@@ -55,24 +60,12 @@ export function Mnemonic() {
               <div className="h-3" ></div>
               <Label >Your Mnemonic Phrase</Label>
               <div className="grid grid-cols-3 gap-2">
-                {[
-                  "abandon",
-                  "ability",
-                  "able",
-                  "about",
-                  "above",
-                  "absent",
-                  "absorb",
-                  "abstract",
-                  "abundant",
-                  "abuse",
-                  "access",
-                  "accident",
-                ].map((word, index) => (
-                  <div key={index} className="bg-muted rounded-md px-3 py-2 text-center text-muted-foreground">
-                    {word}
-                  </div>
-                ))}
+                {
+                  mnemonic.map((word, index) => (
+                    <div key={index} className="bg-muted rounded-md px-3 py-2 text-center text-muted-foreground">
+                      {word}
+                    </div>
+                  ))}
               </div>
             </div>
             <Link
