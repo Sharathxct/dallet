@@ -16,7 +16,7 @@ const handleCopy = async (text: any) => {
 
 
 export default function Account() {
-  const [accData, setAccData] = useState([]); // Use state to manage account data
+  const [accData, setAccData] = useState<any[]>([]); // Use state to manage account data
 
   useEffect(() => {
     const storedAcc = localStorage.getItem('acc');
@@ -30,10 +30,10 @@ export default function Account() {
     }
   }, []);
 
-  const handleAddAcc = () => {
-    const mn = localStorage.getItem('seed');
+  const handleAddAcc = async () => {
+    const mn: string = localStorage.getItem('seed') || '';
     const index = Number(localStorage.getItem('index')) + 1;
-    const seed = mnemonicToSeed(mn);
+    const seed = await mnemonicToSeed(mn);
     const path = `m/44'/501'/${index}'/0'`;
     const derivedSeed = derivePath(path, seed.toString("hex")).key;
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
