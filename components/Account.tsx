@@ -10,7 +10,7 @@ import nacl from 'tweetnacl';
 import { Keypair } from '@solana/web3.js';
 import { IoCopy } from "react-icons/io5";
 
-const handleCopy = async (text) => {
+const handleCopy = async (text: any) => {
   await navigator.clipboard.writeText(text);
 }
 
