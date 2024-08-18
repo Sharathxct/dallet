@@ -8,6 +8,12 @@ import { mnemonicToSeed } from 'bip39';
 import { derivePath } from 'ed25519-hd-key';
 import nacl from 'tweetnacl';
 import { Keypair } from '@solana/web3.js';
+import { IoCopy } from "react-icons/io5";
+
+const handleCopy = async (text) => {
+  await navigator.clipboard.writeText(text);
+}
+
 
 export default function Account() {
   const [accData, setAccData] = useState([]); // Use state to manage account data
@@ -59,9 +65,10 @@ export default function Account() {
             </Avatar>
             <div className="ml-4">
               <p>Account {a.id}</p>
-              <p>{a.pub.slice(0, 4)}......{a.pub.slice(40)}</p>
+              <p className='flex flex-row gap-3 items-center' >{a.pub.slice(0, 4)}......{a.pub.slice(40)} <IoCopy onClick={() => { handleCopy(a.pub) }} className='cursor-pointer' /> </p>
             </div>
           </div>
+
           <BsThreeDotsVertical className="cursor-pointer" />
         </div>
       ))}

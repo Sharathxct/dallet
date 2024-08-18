@@ -10,6 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Account from "@/components/Account";
+import Link from 'next/link';
 
 export default function Wallet() {
   return (
@@ -57,7 +58,7 @@ export default function Wallet() {
       </header>
       <main className="p-4 ">
         <div className="text-center">
-          <h2 className="text-3xl font-bold">0 ETH</h2>
+          <h2 className="text-3xl font-bold">0 SOL</h2>
           <p className="text-gray-400">$0.00 USD</p>
         </div>
         <div className="flex justify-center my-8 w-full justify-center gap-10">
@@ -65,10 +66,13 @@ export default function Wallet() {
             <IoIosAdd size={32} />
             <span className="text-base">Buy & Sell</span>
           </Button>
-          <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
-            <IoIosSend size={32} />
-            <span className="text-base">Send</span>
-          </Button>
+          <Link href={'/wallet/send'} >
+            <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
+              <IoIosSend size={32} />
+              <span className="text-base">Send</span>
+            </Button>
+          </Link>
+
           <Button variant="ghost" className="flex flex-col h-full items-center space-y-1 max-w-12 lg:min-w-24">
             <IoIosSwap size={32} />
             <span className="text-base">Swap</span>

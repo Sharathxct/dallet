@@ -7,16 +7,22 @@ import nacl from "tweetnacl"
 
 export default function CBtn({ nextStep, setMnemonic }: { nextStep: any, setMnemonic: any }) {
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     const mn = generateMnemonic();
-    const seed = mnemonicToSeed(mn);
+    const seed = await mnemonicToSeed(mn);
+
+    console.log("mnemonic :", mn, "seed :", seed);
 
     localStorage.setItem('mp', mn)
     localStorage.setItem('index', '1');
-    const index = Number(localStorage.getItem('index'));
+    const index = 1;
     const path = `m/44'/501'/${index}'/0'`;
+    console.log("index and path", index, path);
+
     const derivedSeed = derivePath(path, seed.toString("hex")).key;
+    console.log("derivedSeed : ", derivedSeed);
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey;
+    console.log("secret:", secret);
     const keypair = Keypair.fromSecretKey(secret);
     const acc = [{
       id: 1,
