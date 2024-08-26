@@ -14,7 +14,17 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
+  id          String      @id @default(uuid())
+  name        String
+  email       String   @unique
+  solWalletId String?
+  solWallet   SolWallet?
+}
+
+model SolWallet {
+  id          String  @id @default(uuid())
+  publicKey   String
+  privateKey  String
+  userId      String  @unique
+  user        User    @relation(fields: [userId], references: [id])
 }

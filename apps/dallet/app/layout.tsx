@@ -1,8 +1,9 @@
 import "@repo/ui/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ThemeProvider } from "../components/theme-provider";
 import Appbar from "@repo/ui/components/Appbar";
+import Authbtn from "~/components/Authbtn";
+import Provider from "~/components/providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,17 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className}`} >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Appbar />
+        <Provider>
+          <Appbar children={<Authbtn />} />
           <div className="mx-5" >
             {children}
           </div>
-        </ThemeProvider>
+        </Provider>
       </body>
 
     </html>
