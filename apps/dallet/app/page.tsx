@@ -1,11 +1,9 @@
-import { Button } from "@repo/ui/components/ui/button";
-import Appbar from "@repo/ui/components/Appbar";
-
+import Hero from '@repo/ui/components/hero';
+import * as wallet from '../public/assets/wallet.jpg'
 export default function Page() {
   return (
-    <main >
-      <Appbar />
-      <Button>Click me</Button>
-    </main>
+    <div className="flex flex-col min-h-[89dvh] justif-center items-center" >
+      <Hero img={wallet} />
+    </div>
   );
 }
