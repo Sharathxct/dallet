@@ -1,7 +1,10 @@
+import Wallet from '../../components/wallet';
+import Balance from '../../components/balance';
+
 export default function App() {
   return (
     <>
-      <p>This is after the login</p>
+      <Wallet Balance={Balance} />
     </>
   )
 }

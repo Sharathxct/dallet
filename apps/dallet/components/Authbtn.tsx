@@ -7,7 +7,7 @@ export default function Authbtn() {
   const session = useSession();
   return (
     <>
-      {session.data?.user ? <Button onClick={() => { signOut() }} >Sign out</Button> : <Button onClick={() => { signIn() }} >Sign in</Button>}
+      {session.data?.user ? <Button onClick={() => { signOut() }} >Sign out</Button> : <Button onClick={() => { signIn('google', { callbackUrl: 'http://localhost:3000/app' }) }} >Sign in</Button>}
     </>
   )
 }

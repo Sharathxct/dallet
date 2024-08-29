@@ -2,6 +2,16 @@ import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import { prisma as db } from '../../../../db';
 import { Keypair } from "@solana/web3.js";
+import { Session } from 'next-auth';
+
+export interface session extends Session {
+  user: {
+    email: string;
+    name: string;
+    image: string
+    pubKey: string;
+  };
+}
 
 const handler = NextAuth({
   providers: [
@@ -11,6 +21,29 @@ const handler = NextAuth({
     })
   ],
   callbacks: {
+    session: ({ session, token }: any): session => {
+      const newSession: session = session as session;
+      if (newSession.user && token.pubKey) {
+        // @ts-ignore
+        newSession.user.pubKey = token.pubKey ?? "";
+      }
+      return newSession!;
+    },
+    async jwt({ token, account, profile }: any) {
+      const user = await db.User.findFirst({
+        where: {
+          sub: account?.providerAccountId ?? ""
+        },
+        include: {
+          solWallet: true // Eagerly load the associated SolWallet
+        }
+      })
+      if (user) {
+        console.log("user.......", user);
+        token.pubKey = user.solWallet?.publicKey
+      }
+      return token
+    },
     async signIn({ user, account, profile, email, credentials }) {
       if (account?.provider === 'google') {
         const email = user.email;
@@ -23,11 +56,19 @@ const handler = NextAuth({
         const userDb = await db.User.findFirst({
           where: {
             email: email
+          },
+          include: {
+            solWallet: true // Eagerly load the associated SolWallet
           }
         })
 
         if (userDb) {
-          return true;
+          return {
+            user: {
+              ...user,
+              pubKey: userDb.solWallet?.publicKey
+            }
+          };
         }
 
         const keypair = Keypair.generate();
@@ -38,6 +79,7 @@ const handler = NextAuth({
           data: {
             name: name,
             email: email,
+            sub: account.providerAccountId,
             solWallet: {
               create: {
                 publicKey: publicKey,
@@ -46,7 +88,12 @@ const handler = NextAuth({
             }
           }
         })
-        return true;
+        return {
+          user: {
+            ...user,
+            pubKey: publicKey
+          }
+        };
       }
       return false;
     }
