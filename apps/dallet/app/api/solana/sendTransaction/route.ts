@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { authConfig } from '../../../../lib/auth';
 import { prisma as db } from '../../../../db';
 import { sendTransaction } from "../../../../lib/solana";
