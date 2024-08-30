@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@prisma/client": "^5.18.0",
-    "@repo/solana": "workspace:*",
     "@repo/ui": "workspace:*",
     "@solana/web3.js": "^1.95.3",
     "axios": "^1.7.5",
