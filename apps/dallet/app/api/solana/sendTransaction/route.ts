@@ -14,9 +14,12 @@ export async function POST(req: NextRequest) {
   console.log("session", session);
   console.log("data", data);
 
+  //@ts-ignore
   if (!!session.user.email) {
+    //@ts-ignore
     const user = await db.User.findFirst({
       where: {
+        //@ts-ignore
         email: session.user.email
       },
       include: {
@@ -26,10 +29,12 @@ export async function POST(req: NextRequest) {
     console.log('user....', user);
 
     try {
+      //@ts-ignore
       const signature = await sendTransaction(data.addr, data.amount, user.solWallet.privateKey)
       console.log('signature........', signature)
       return NextResponse.json({ message: "hi", signature })
     } catch (error) {
+      //@ts-ignore
       console.log(error.message);
       return NextResponse.json({ error: true })
     }
