@@ -1,19 +1,13 @@
-'use client'
-
-import { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { UnsafeBurnerWalletAdapter, TorusWalletAdapter } from '@solana/wallet-adapter-wallets';
-import {
-  WalletModalProvider,
-} from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
-import { DalletWalletAdapter } from '@dallet/wallet-adapter'
+import { DalletWalletAdapter } from '@dallet/wallet-adapter';
 
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
 
-export function Wallet({ children }: { children: React.ReactNode }) {
+export const Wallet: FC = ({ children }: { children: React.ReactNode }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
   const network = WalletAdapterNetwork.Devnet;
 
@@ -34,8 +28,6 @@ export function Wallet({ children }: { children: React.ReactNode }) {
        * instantiate its legacy wallet adapter here. Common legacy adapters can be found
        * in the npm package `@solana/wallet-adapter-wallets`.
        */
-      new UnsafeBurnerWalletAdapter(),
-      new TorusWalletAdapter(),
       new DalletWalletAdapter(),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,10 +37,9 @@ export function Wallet({ children }: { children: React.ReactNode }) {
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider>
-          { /* Your app's components go here, nested within the context providers. */}
-          {children}
-        </WalletModalProvider>
+        { /* Your app's components go here, nested within the context providers. */}
+        {children}
+
       </WalletProvider>
     </ConnectionProvider>
   );

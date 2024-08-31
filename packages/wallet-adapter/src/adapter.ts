@@ -9,7 +9,7 @@ import {
 import { type SolanaSignInInput, type SolanaSignInOutput } from '@solana/wallet-standard-features';
 import { createSignInMessage } from '@solana/wallet-standard-util';
 import type { Transaction, TransactionVersion, VersionedTransaction } from '@solana/web3.js';
-import { Keypair } from '@solana/web3.js';
+import { Keypair, PublicKey } from '@solana/web3.js';
 
 export const DalletWalletName = 'Dallet' as WalletName<'Dallet'>;
 
@@ -29,19 +29,18 @@ export class DalletWalletAdapter extends BaseSignInMessageSignerWalletAdapter {
    * secret key, and because the keypair will be lost any time the wallet is disconnected or the window is refreshed.
    */
   private _keypair: Keypair | null = null;
+  private _publicKey: PublicKey | null = null;
+  private _connecting = false;
+  private _iframe: HTMLIFrameElement | null = null;
 
-  constructor() {
-    super();
-    console.warn(
-      'Your application is presently configured to use the `UnsafeBurnerWalletAdapter`. ' +
-      'Find and remove it, then replace it with a list of adapters for ' +
-      'wallets you would like your application to support. See ' +
-      'https://github.com/anza-xyz/wallet-adapter#usage for an example.'
-    );
-  }
+
+  // constructor() {
+  //   super()
+  //   window.addEventListener('message', this._handleMessage.bind(this));
+  // }
 
   get connecting() {
-    return false;
+    return this._connecting;
   }
 
   get publicKey() {
@@ -52,13 +51,99 @@ export class DalletWalletAdapter extends BaseSignInMessageSignerWalletAdapter {
     return WalletReadyState.Loadable;
   }
 
+  // async connect(): Promise<void> {
+  //   this._keypair = new Keypair();
+  //   this.emit('connect', this._keypair.publicKey);
+  // }
+
+  // async connect(): Promise<void> {
+  //   if (this.connecting) throw new Error('Already connecting');
+  //
+  //   return new Promise((resolve, reject) => {
+  //     this._iframe = document.createElement('iframe');
+  //     this._iframe.src = 'http://localhost:3000/app/connect';
+  //     this._iframe.style.cssText += 'position: absolute;width: 40%;top: 0%;right: 0%;height: 60%;';
+  //
+  //     const cleanup = () => {
+  //       if (this._iframe) {
+  //         document.body.removeChild(this._iframe);
+  //         this._iframe = null;
+  //       }
+  //       window.removeEventListener('message', onMessage);
+  //     };
+  //
+  //     const onMessage = (event: MessageEvent) => {
+  //       if (event.origin !== 'https://localhost:3000') return;
+  //
+  //       if (event.data.publicKey) {
+  //         this._publicKey = new PublicKey(event.data.publicKey);
+  //         window.removeEventListener('message', onMessage);
+  //         document.body.removeChild(this._iframe!);
+  //         this._iframe = null;
+  //         this.emit('connect', this._publicKey);
+  //         resolve();
+  //       } else {
+  //         reject(new Error('Failed to connect'));
+  //       }
+  //
+  //       // Cleanup after resolving or rejecting
+  //       cleanup();
+  //     };
+  //
+  //     window.addEventListener('message', onMessage);
+  //
+  //     document.body.appendChild(this._iframe);
+  //   });
+  // }
+  //
+
   async connect(): Promise<void> {
-    this._keypair = new Keypair();
-    this.emit('connect', this._keypair.publicKey);
+    if (this.connecting) throw new Error('Already connecting');
+
+    return new Promise((resolve, reject) => {
+      const popup = window.open(
+        'https://dallet-one.vercel.app/app/connect',
+        '_blank',
+        'width=500,height=600'
+      );
+
+      const interval = setInterval(() => {
+        if (!popup || popup.closed) {
+          clearInterval(interval);
+          reject(new Error('User closed the popup or connection failed'));
+          return;
+        }
+      }, 500);
+
+      const onMessage = (event: MessageEvent) => {
+        if (event.origin !== 'https://your-wallet-website.com') return;
+
+        if (event.data.publicKey) {
+          this._publicKey = new PublicKey(event.data.publicKey);
+          this.emit('connect', this._publicKey);
+          resolve();
+        } else {
+          reject(new Error('Failed to connect'));
+        }
+
+        clearInterval(interval);
+        window.removeEventListener('message', onMessage);
+        if (popup) {
+          popup.close();
+        }
+      };
+
+      window.addEventListener('message', onMessage);
+    });
   }
+
 
   async disconnect(): Promise<void> {
     this._keypair = null;
+    if (this._iframe) {
+      document.body.removeChild(this._iframe);
+      this._iframe = null;
+    }
     this.emit('disconnect');
   }
 
