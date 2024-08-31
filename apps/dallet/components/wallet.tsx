@@ -23,7 +23,7 @@ export default function Wallet({ Balance }: { Balance: React.FC }) {
               <Badge className="flex items-center gap-2"> <MdWifi /> Devnet </Badge>
             </div>
           </div>
-          <div className="value-wal text-3xl flex w-full h-[20dvh] justify-center items-center " >
+          <div className="value-wal text-3xl flex flex-col w-full h-[20dvh] justify-center items-center " >
             <Balance />
           </div>
           <div className="btns-wal flex justify-center gap-10 " >

@@ -8,6 +8,7 @@ import {
   WalletModalProvider,
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
+import { DalletWalletAdapter } from '@dallet/wallet-adapter'
 
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
@@ -35,6 +36,7 @@ export function Wallet({ children }: { children: React.ReactNode }) {
        */
       new UnsafeBurnerWalletAdapter(),
       new TorusWalletAdapter(),
+      new DalletWalletAdapter(),
     ],
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [network]

@@ -96,6 +96,9 @@ importers:
 
   apps/example:
     dependencies:
+      '@dallet/wallet-adapter':
+        specifier: workspace:*
+        version: link:../../packages/wallet-adapter
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -268,6 +271,31 @@ importers:
       typescript:
         specifier: ^5.4.5
         version: 5.4.5
+
+  packages/wallet-adapter:
+    dependencies:
+      '@noble/curves':
+        specifier: ^1.1.0
+        version: 1.5.0
+      '@solana/wallet-adapter-base':
+        specifier: ^0.9.23
+        version: 0.9.23(@solana/web3.js@1.95.3(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+      '@solana/wallet-standard-features':
+        specifier: ^1.1.0
+        version: 1.2.0
+      '@solana/wallet-standard-util':
+        specifier: ^1.1.0
+        version: 1.1.1
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@solana/web3.js':
+        specifier: ^1.77.3
+        version: 1.95.3(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      typescript:
+        specifier: latest
+        version: 5.5.4
 
 packages:
 
@@ -6566,6 +6594,11 @@ packages:
 
   typescript@5.4.5:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  typescript@5.5.4:
+    resolution: {integrity: sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -14916,6 +14949,8 @@ snapshots:
   typescript@4.9.5: {}
 
   typescript@5.4.5: {}
+
+  typescript@5.5.4: {}
 
   ua-parser-js@1.0.38: {}
 

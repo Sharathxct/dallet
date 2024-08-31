@@ -1,0 +1,22 @@
+{
+  "name": "@dallet/wallet-adapter",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "version": "0.0.0",
+  "private": true,
+  "main": "lib/index.js",
+  "dependencies": {
+    "@noble/curves": "^1.1.0",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-standard-features": "^1.1.0",
+    "@solana/wallet-standard-util": "^1.1.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "latest",
+    "@solana/web3.js": "^1.77.3"
+  }
+}

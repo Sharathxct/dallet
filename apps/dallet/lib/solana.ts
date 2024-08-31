@@ -43,7 +43,7 @@ export async function getBalanceInUsd(pubKey: string) {
   const balanceInUsd = balanceInSol * solPriceInUsd;
   // console.log('balance in usd', balanceInUsd);
 
-  return balanceInUsd.toFixed(2);
+  return { usd: balanceInUsd.toFixed(2), sol: balanceInSol };
 }
 
 export async function sendTransaction(recipientPublicKey, amount, senderPrivateKey) {
