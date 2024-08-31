@@ -7,7 +7,7 @@ This is Turborepo starter.
 > [!NOTE]
 > This example uses `pnpm` as package manager.
 
-[npm version](https://github.com/dan5py/turborepo-shadcn-ui/tree/npm)
+[npm version](https://github.com/sharathxct/dallet/tree/main)
 
 ## Using this example
 
@@ -16,7 +16,7 @@ Clone the repository:
 Install dependencies:
 
 ```sh
-cd turborepo-shadcn-ui
+cd dallet
 pnpm install
 ```
 
