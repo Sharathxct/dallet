@@ -1,8 +1,8 @@
-# Turborepo starter with shadcn/ui
+# Simple Web Based wallet with wallet adapter
 
 ![Static Badge](https://img.shields.io/badge/shadcn%2Fui-0.8.0-blue?link=https%3A%2F%2Fgithub.com%2Fshadcn%2Fui)
 
-This is Turborepo starter with shadcn/ui pre-configured.
+This is Turborepo starter.
 
 > [!NOTE]
 > This example uses `pnpm` as package manager.
@@ -12,10 +12,6 @@ This is Turborepo starter with shadcn/ui pre-configured.
 ## Using this example
 
 Clone the repository:
-
-```sh
-git clone https://github.com/dan5py/turborepo-shadcn-ui.git
-```
 
 Install dependencies:
 
