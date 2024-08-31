@@ -1,5 +1,5 @@
 import './App.css'
-import { SendSOLToRandomAddress } from './components/SendRand';
+
 import {
   WalletModalProvider,
   WalletDisconnectButton,

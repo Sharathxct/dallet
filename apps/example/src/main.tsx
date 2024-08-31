@@ -6,6 +6,7 @@ import { Wallet } from './components/Wallet.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    {/*@ts-ignore */}
     <Wallet>
       <App />
     </Wallet>

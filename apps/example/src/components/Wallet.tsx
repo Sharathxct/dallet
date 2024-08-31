@@ -7,6 +7,7 @@ import { DalletWalletAdapter } from '@dallet/wallet-adapter';
 // Default styles that can be overridden by your app
 import '@solana/wallet-adapter-react-ui/styles.css';
 
+//@ts-ignore
 export const Wallet: FC = ({ children }: { children: React.ReactNode }) => {
   // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
   const network = WalletAdapterNetwork.Devnet;
