@@ -11,11 +11,10 @@ export default function Hero({ img }) {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Not just another solana wallet extension
+                    Web based based wallet and wallet adapter
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Our user-friendly crypto wallet app makes it easy to manage your digital assets. Enjoy seamless
-                    transactions, advanced security features, and real-time market insights.
+                    This is a submission for 100xdevs x Superteam hackathon. The project is a simple web based wallet, with a wallet adapter package which lets solana dapps to connect to this wallet, not yet published to npm but you can find the code at <a href="https://github.com/Sharathxct/dallet" target="_blank" className="text-blue-500" >github</a> and look at the example vite react to see how dapps connect to dallet <a href="https://example-nextjs-dallet-connect.vercel.app/" target="_blank" className="text-blue-500">(Live link)</a>. NOTE: This wallet only supports devnet cluster as of now.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">

@@ -81,7 +81,9 @@ export class DalletWalletAdapter extends BaseSignInMessageSignerWalletAdapter {
         if (this.connecting)
             throw new Error('Already connecting');
         return new Promise((resolve, reject) => {
-            const popup = window.open('https://dallet-one.vercel.app/app/connect', '_blank', 'width=500,height=600');
+            const popup = window.open('https://dallet-one.vercel.app/app/connect', 
+            // 'http://localhost:3000/app/connect',
+            '_blank', 'width=500,height=600');
             const interval = setInterval(() => {
                 if (!popup || popup.closed) {
                     clearInterval(interval);
@@ -90,9 +92,11 @@ export class DalletWalletAdapter extends BaseSignInMessageSignerWalletAdapter {
                 }
             }, 500);
             const onMessage = (event) => {
-                if (event.origin !== 'https://your-wallet-website.com')
-                    return;
+                console.log(event);
+                console.log("public key");
+                console.log(event.data.publicKey);
                 if (event.data.publicKey) {
+                    console.log(event.data.publicKey);
                     this._publicKey = new PublicKey(event.data.publicKey);
                     this.emit('connect', this._publicKey);
                     resolve();
